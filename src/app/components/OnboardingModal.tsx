@@ -1,3 +1,13 @@
+// BarcodeDetector 타입 선언 (브라우저 내장 API)
+declare global {
+  interface BarcodeDetector {
+    detect(video: HTMLVideoElement): Promise<Array<{ rawValue: string }>>;
+  }
+  var BarcodeDetector: {
+    prototype: BarcodeDetector;
+    new (options?: { formats: string[] }): BarcodeDetector;
+  };
+}
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -215,7 +225,7 @@ function useQRScanner(enabled: boolean) {
 
   useEffect(() => {
     // Feature detect
-    // @ts-ignore
+  // ...existing code...
     const ok = typeof window !== "undefined" && "BarcodeDetector" in window;
     setSupported(ok);
   }, []);
@@ -223,8 +233,8 @@ function useQRScanner(enabled: boolean) {
   useEffect(() => {
     let stream: MediaStream | null = null;
     let rafId: number | null = null;
-    // @ts-ignore
-    let detector: any = null;
+  // ...existing code...
+  let detector: BarcodeDetector | null = null;
 
     const start = async () => {
       if (!enabled || !videoRef.current) return;
@@ -232,11 +242,12 @@ function useQRScanner(enabled: boolean) {
         stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
         videoRef.current.srcObject = stream;
         await videoRef.current.play();
-        // @ts-ignore
+  // ...existing code...
         detector = new window.BarcodeDetector({ formats: ["qr_code"] });
         const tick = async () => {
           if (!videoRef.current) return;
           try {
+            if (!detector) return;
             const detections = await detector.detect(videoRef.current);
             if (detections && detections[0]?.rawValue) {
               setResult(detections[0].rawValue);
@@ -287,7 +298,7 @@ export default function OnboardingModal({ onComplete }: { onComplete: () => void
     }
   });
 
-  const { videoRef, supported: qrSupported, result: qrResult, setResult: setQrResult } = useQRScanner(openCam);
+  const { videoRef, supported: qrSupported, result: qrResult } = useQRScanner(openCam);
 
   const t = useMemo(() => dict[form.lang], [form.lang]);
   const isRTL = form.lang === "ar";
@@ -655,7 +666,7 @@ export default function OnboardingModal({ onComplete }: { onComplete: () => void
               <Row
                 label={t.avoid}
                 value={["pork", "alcohol", "beef", "shellfish"]
-                  .filter((k) => (form.avoid as any)[k])
+                  .filter((k) => (form.avoid as Record<string, boolean>)[k])
                   .map((k) => t[k])
                   .join(", ") || "-"}
               />
@@ -671,7 +682,7 @@ export default function OnboardingModal({ onComplete }: { onComplete: () => void
               />
               <Row label={t.spice} value={`${form.spice}/4`} />
               <Row label={t.budget} value={`${form.budget.toLocaleString()}원`} />
-              <Row label={t.cuisines} value={form.cuisines.map((k) => (t as any)[k]).join(", ")} />
+              <Row label={t.cuisines} value={form.cuisines.map((k) => (t as Record<string, string>)[k]).join(", ")} />
               <Row label="Location" value={form.location ? `${form.location.lat.toFixed(5)}, ${form.location.lon.toFixed(5)}` : "-"} />
               <Row label="Booth QR" value={form.lastBoothQR || "-"} />
             </div>

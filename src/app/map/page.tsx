@@ -1,3 +1,10 @@
+// Leaflet Map에 커스텀 프로퍼티 타입 확장
+declare module 'leaflet' {
+  interface Map {
+    __drawMarkers?: () => void;
+    __fitToMarkers?: () => void;
+  }
+}
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -99,8 +106,8 @@ function filterBooths(booths: Booth[], survey: Survey | null): Booth[] {
  * ========================= */
 export default function MapPage() {
   const mapDivRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<any>(null); // L.Map
-  const layerRef = useRef<any>(null); // L.LayerGroup
+  const mapRef = useRef<L.Map | null>(null);
+  const layerRef = useRef<L.LayerGroup | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [usingGeoloc, setUsingGeoloc] = useState(false);
   const [counts, setCounts] = useState({ total: BOOTHS.length, shown: BOOTHS.length });
@@ -110,9 +117,9 @@ export default function MapPage() {
 
   // Initialize Leaflet map (client only)
   useEffect(() => {
-    let L: any;
-    let map: any;
-    let layer: any;
+  let L: typeof import('leaflet');
+  let map: L.Map;
+  let layer: L.LayerGroup;
 
     const init = async () => {
       if (!mapDivRef.current) return;
@@ -193,7 +200,9 @@ export default function MapPage() {
 <a href="/map/${b.id}" style="display:inline-block;font-size:13px;font-weight:600;color:#2563eb;padding:4px 10px;border-radius:8px;border:1px solid #2563eb;background:#fff;">상세 보기</a>
             `.trim()
           );
-          marker.addTo(layerRef.current);
+          if (layerRef.current) {
+            marker.addTo(layerRef.current);
+          }
         });
       }
 
@@ -209,8 +218,8 @@ export default function MapPage() {
       }
 
       // 외부에서 호출할 수 있도록 참조 저장
-      (map as any).__drawMarkers = drawMarkers;
-      (map as any).__fitToMarkers = fitToMarkers;
+  (map as unknown as Record<string, unknown>).__drawMarkers = drawMarkers;
+  (map as unknown as Record<string, unknown>).__fitToMarkers = fitToMarkers;
     };
 
     init();
@@ -222,7 +231,7 @@ export default function MapPage() {
       }
       layerRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // ...existing code...
   }, [filtered]);
 
   // Survey load (초기 1회)
@@ -259,7 +268,7 @@ export default function MapPage() {
       );
       const { latitude, longitude } = pos.coords;
       const L = (await import("leaflet")).default;
-      const map = mapRef.current as any;
+  const map = mapRef.current;
       if (map) {
         map.setView([latitude, longitude], 16);
         // pulsating marker
