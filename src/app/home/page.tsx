@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MENUS, type Menu } from "../map/_menus";
 
@@ -141,15 +142,13 @@ function useQRScanner(enabled: boolean) {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    // @ts-ignore
-    setSupported(typeof window !== "undefined" && "BarcodeDetector" in window);
+  setSupported(typeof window !== "undefined" && "BarcodeDetector" in window);
   }, []);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
     let rafId: number | null = null;
-    // @ts-ignore
-    let detector: any = null;
+  let detector: BarcodeDetector | null = null;
 
     const start = async () => {
       if (!enabled || !videoRef.current) return;
@@ -157,11 +156,11 @@ function useQRScanner(enabled: boolean) {
         stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
         videoRef.current.srcObject = stream;
         await videoRef.current.play();
-        // @ts-ignore
-        detector = new window.BarcodeDetector({ formats: ["qr_code"] });
+  detector = new window.BarcodeDetector({ formats: ["qr_code"] });
         const tick = async () => {
           if (!videoRef.current) return;
           try {
+            if (!detector) return;
             const detections = await detector.detect(videoRef.current);
             if (detections?.[0]?.rawValue) {
               setResult(detections[0].rawValue);
@@ -452,7 +451,7 @@ export default function HomePage() {
               const boothId = m.boothId;
               return (
                 <Link key={m.id} href={`/map/${boothId}/menu/${m.id}`} className="overflow-hidden rounded-2xl border bg-white shadow-sm ring-1 ring-black/5 hover:shadow-md">
-                  <img src={m.imageUrl} alt={m.name} className="h-24 w-full object-cover" loading="lazy" />
+                  <Image src={m.imageUrl} alt={m.name} width={400} height={96} className="h-24 w-full object-cover" loading="lazy" unoptimized />
                   <div className="p-3">
                     <div className="font-semibold">{m.name}</div>
                     <div className="text-xs text-gray-500">₩{m.price.toLocaleString()} · 🌶 {m.spiciness}</div>
