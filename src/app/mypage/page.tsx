@@ -360,7 +360,7 @@ export default function Mypage() {
 
   const t = useMemo(() => dict[(edit ? draft.lang : form.lang) ?? "ko"], [edit, draft.lang, form.lang]);
   const isRTL = (edit ? draft.lang : form.lang) === "ar";
-  const { videoRef, supported: qrSupported, result: qrResult, setResult: setQrResult } = useQRScanner(openCam);
+  const { videoRef, supported: qrSupported, result: qrResult } = useQRScanner(openCam);
 
   // when QR detected, write to both (so it works in or out of edit mode)
   useEffect(() => {

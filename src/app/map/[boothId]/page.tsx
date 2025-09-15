@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useState, use as useUnwrap } from "react";
 import { MENUS, type Menu } from "../_menus";
 
@@ -156,11 +157,14 @@ export default function BoothDetailPage({ params }: { params: Promise<{ boothId:
             return (
               <div key={m.id} className="bg-white border rounded-2xl p-4 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <img
+                  <Image
                     src={m.imageUrl}
                     alt={m.name}
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-xl object-cover border shrink-0"
                     loading="lazy"
+                    unoptimized
                   />
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-3">

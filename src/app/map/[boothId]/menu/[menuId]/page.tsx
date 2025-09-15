@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useState, use as useUnwrap } from "react";
 import { MENUS, type Menu } from "../../../_menus";
 
@@ -67,7 +68,7 @@ function evaluate(menu: Menu, survey: Survey | null) {
     };
   const allergenKeys: Array<"nuts" | "dairy" | "gluten" | "egg" | "soy" | "seafood"> = ["nuts", "dairy", "gluten", "egg", "soy", "seafood"];
     allergenKeys.forEach((a) => {
-      if (allergies[a] && menu.allergens?.includes(a as any)) reasons.push(`알레르기: ${amap[a]}`);
+  if (allergies[a] && menu.allergens?.includes(a as keyof typeof amap)) reasons.push(`알레르기: ${amap[a]}`);
     });
   }
   return { ok: reasons.length === 0, reasons };
@@ -100,11 +101,14 @@ export default function MenuDetailPage({ params }: { params: Promise<{ boothId: 
       <div className="-mt-8 mx-auto max-w-xl px-4">
         <div className="bg-white rounded-2xl shadow-lg border overflow-hidden">
           {/* Hero Image */}
-          <img
+          <Image
             src={menu.imageUrl}
             alt={menu.name}
+            width={600}
+            height={224}
             className="w-full h-56 object-cover"
             loading="lazy"
+            unoptimized
           />
 
           <div className="p-4">
