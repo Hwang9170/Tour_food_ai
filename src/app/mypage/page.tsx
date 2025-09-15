@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 
 /** =========================
@@ -655,7 +656,7 @@ export default function Mypage() {
             <span className="text-sm text-gray-600">{coords(view.location)}</span>
           </div>
           {view.location && (
-            <img src={staticMapUrl(view.location)} alt="map" className="w-full rounded-xl border" />
+            <Image src={staticMapUrl(view.location)} alt="map" width={400} height={200} className="w-full rounded-xl border" />
           )}
         </section>
 

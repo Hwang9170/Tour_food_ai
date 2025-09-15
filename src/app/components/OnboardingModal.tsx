@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 /** =========================
  *  i18n (ko/en/ar)
@@ -577,7 +578,7 @@ export default function OnboardingModal({ onComplete }: { onComplete: () => void
             {form.location && (
               <div>
                 <p className="text-sm font-semibold mb-2">{t.mapPreview}</p>
-                <img src={staticMapUrl} alt="map" className="w-full rounded-xl border mb-4" />
+                <Image src={staticMapUrl} alt="map" width={400} height={200} className="w-full rounded-xl border mb-4" />
               </div>
             )}
             <div className="flex justify-between">
