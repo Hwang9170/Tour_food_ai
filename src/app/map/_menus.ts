@@ -36,7 +36,7 @@ export const MENUS: Record<string, Menu[]> = {
       halalCertified: true,
       allergens: ["dairy", "gluten"],
       imageUrl:
-        "https://images.unsplash.com/photo-1604908176997-4312f4b181b5?q=80&w=1200&auto=format&fit=crop",
+        "https://img.freepik.com/premium-photo/chicken-wrap-roll-durum-doner-kebab-with-meat-vegetable-salad-wooden-background-top-view_89816-46822.jpg",
       description: "그릴 치킨과 신선한 채소, 요거트 소스를 또띠아에 감싼 정통 스타일 케밥 랩.",
       steps: [
         "닭다리살을 요거트·레몬·향신료(커민, 코리앤더)로 2시간 이상 마리네이드합니다.",
@@ -95,7 +95,7 @@ export const MENUS: Record<string, Menu[]> = {
       halalCertified: true,
       containsBeef: false,
       imageUrl:
-        "https://images.unsplash.com/photo-1615937691194-97dbd3b28655?q=80&w=1200&auto=format&fit=crop",
+        "https://storage.googleapis.com/takeapp/media/cm2w4igjf00050ci92mp8479y.jpg",
       description: "부드러운 양고기 케밥과 허브 라이스, 피클이 조화로운 보울.",
       steps: [
         "양고기를 로즈마리·타임·갈릭으로 2시간 마리네이드합니다.",
@@ -252,7 +252,7 @@ export const MENUS: Record<string, Menu[]> = {
       spiciness: 1,
       allergens: ["gluten", "soy"],
       imageUrl:
-        "https://images.unsplash.com/photo-1617692855027-86d0d8fc1f53?q=80&w=1200&auto=format&fit=crop",
+        "https://png.pngtree.com/png-clipart/20250126/original/pngtree-burger-featuring-a-golden-brown-bun-tender-chicken-png-image_20332406.png",
       description: "간장 베이스 닭고기 소를 넣은 번.",
       steps: [
         "닭고기를 간장·마늘·생강으로 볶아 수분을 날립니다.",
@@ -307,7 +307,7 @@ export const MENUS: Record<string, Menu[]> = {
       halalCertified: true,
       allergens: ["dairy"],
       imageUrl:
-        "https://images.unsplash.com/photo-1588167056547-c183313da7b1?q=80&w=1200&auto=format&fit=crop",
+        "https://recipe1.ezmember.co.kr/cache/recipe/2021/08/18/afef7d74461185cadc62bc27f86e1a001.jpg",
       description: "크리미한 토마토·버터 소스의 부드러운 치킨 커리.",
       steps: [
         "치킨을 탄두리 마살라로 마리네이드(2시간).",
@@ -342,7 +342,7 @@ export const MENUS: Record<string, Menu[]> = {
       price: 10000,
       spiciness: 2,
       imageUrl:
-        "https://images.unsplash.com/photo-1625944527942-6546e1bdf4cf?q=80&w=1200&auto=format&fit=crop",
+        "https://recipe1.ezmember.co.kr/cache/recipe/2022/11/09/aaed0982a55d762fe1b92c6e1cbc2a1e1.jpg",
       description: "제철 채소로 만든 가벼운 코코넛 커리.",
       steps: [
         "코코넛 밀크와 커리 페이스트를 끓입니다.",
@@ -397,7 +397,7 @@ export const MENUS: Record<string, Menu[]> = {
       spiciness: 2,
       containsBeef: true,
       imageUrl:
-        "https://images.unsplash.com/photo-1550547660-26175363e1d1?q=80&w=1200&auto=format&fit=crop",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYCHP5Fs-rPukeNHujXkLk2DBLXupxi9q1mg&s",
       description: "숯불 향이 살아 있는 소고기 꼬치.",
       steps: [
         "비프 큐브를 간장·설탕·마늘·후추로 마리네이드(1시간).",

@@ -107,6 +107,8 @@ export default function AdminHome() {
 
   return (
     <main className="mx-auto max-w-3xl p-4 pb-24">
+      <br></br>      <br></br>
+
   <h1 className="text-2xl font-bold">관리자 · 문서 업로드 (OCR·NLP)</h1>
       <p className="mt-1 text-sm text-gray-600">
         PDF/이미지 업로드
@@ -173,6 +175,8 @@ export default function AdminHome() {
       {items.length > 0 && (
         <section className="mt-6">
           <div className="mb-2 flex items-center justify-between">
+            <br></br> <br></br> <br></br>            <br></br> <br></br> <br></br>
+
             <h2 className="text-lg font-semibold">추출 결과 — 총 {items.length}개</h2>
             <Link href="/admin/review" className="text-sm text-indigo-600 underline">
               검수/발행 화면으로 이동
