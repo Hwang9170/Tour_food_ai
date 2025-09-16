@@ -114,7 +114,7 @@ export const MENUS: Record<string, Menu[]> = {
       halalCertified: true,
       allergens: ["gluten"],
       imageUrl:
-        "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=1200&auto=format&fit=crop",
+        "https://resource.kyobo.com/kyobostory/resources/front/images/contents/inside/20181224/img08.png",
       description: "집에서 만든 크리미한 후무스에 따끈한 피타 브레드를 곁들인 사이드.",
       steps: [
         "삶은 병아리콩을 타히니·레몬즙·올리브오일·마늘과 함께 곱게 블렌딩.",
