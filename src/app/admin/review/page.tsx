@@ -24,7 +24,7 @@ export default function ReviewPage() {
   useEffect(() => {
     const raw = sessionStorage.getItem("last_ingest_items");
     if (raw) {
-      const parsed = JSON.parse(raw) as any[];
+  const parsed = JSON.parse(raw) as MenuDraft[];
       const mapped: MenuDraft[] = parsed.map((m) => ({
         boothCode: m.boothCode ?? "B01",
         name: m.name,
